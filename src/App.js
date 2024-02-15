@@ -1,11 +1,38 @@
 import logo from "./logo.svg";
 import "./App.css";
 import DiaryEditor from "./DiaryEditor";
+import DiaryList from "./DiraryList";
+
+// 데이터 객체를 리스트로
+const dummyList = [
+  {
+    id: 1,
+    author: "이유경",
+    content: "하이1",
+    emotion: 5,
+    created_date: new Date().getTime(),
+  },
+  {
+    id: 2,
+    author: "이유경",
+    content: "하이1",
+    emotion: 5,
+    created_date: new Date().getTime(),
+  },
+  {
+    id: 3,
+    author: "이유경",
+    content: "하이1",
+    emotion: 5,
+    created_date: new Date().getTime(),
+  },
+];
 
 function App() {
   return (
     <div className="App">
       <DiaryEditor />
+      <DiaryList diaryList={dummyList} />
     </div>
   );
 }
