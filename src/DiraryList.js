@@ -1,6 +1,6 @@
 import DiaryItem from "./DiaryItem";
 
-const DiaryList = ({ diaryList }) => {
+const DiaryList = ({ onDelete, diaryList }) => {
   console.log(diaryList);
   return (
     <div className="DiaryList">
@@ -14,7 +14,7 @@ const DiaryList = ({ diaryList }) => {
           //   <div>일기 : {it.content}</div>
           //   <div>작성 시간 : {it.created_date}</div>
           // </div>
-          <DiaryItem key={it.id} {...it}></DiaryItem>
+          <DiaryItem key={it.id} {...it} onDelete={onDelete}></DiaryItem> // ondelete 던짐
         ))}
       </div>
     </div>

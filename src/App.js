@@ -34,6 +34,7 @@ function App() {
   const dataId = useRef(0); // 0으로 초기화
 
   const onCreate = (author, content, emotion) => {
+    // DiaryEditor에서 클릭시 실행
     const created_date = new Date().getTime();
     const newItem = {
       author,
@@ -47,10 +48,17 @@ function App() {
     setData([newItem, ...data]); // 새로운 data가 먼저 보여야함, 기존 데이터는 뒤에 보이게
   };
 
+  // 삭제하기
+  const onDelete = (targetId) => {
+    console.log("${targetId}가 삭제되었습니다.");
+    const newDiaryList = data.filter((it) => it.id !== targetId);
+    setData(newDiaryList); // 타겟 id 게시글 제외 출력
+  };
+
   return (
     <div className="App">
       <DiaryEditor onCreate={onCreate} />
-      <DiaryList diaryList={data} />
+      <DiaryList onDelete={onDelete} diaryList={data} />
     </div>
   );
 }

@@ -31,7 +31,7 @@ const DiaryEditor = ({ onCreate }) => {
       contentInput.current.focus();
       return;
     }
-    onCreate(state.author, state.content, state.emotion); // 스테이트에 다 저장되어 있어서
+    onCreate(state.author, state.content, state.emotion); // 스테이트에 다 저장되어 있어서, *** App.js로 감
     alert("저장성공");
     setState({
       author: "",
