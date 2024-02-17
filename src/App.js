@@ -55,10 +55,19 @@ function App() {
     setData(newDiaryList); // 타겟 id 게시글 제외 출력
   };
 
+  const onEdit = (targetId, newContent) => {
+    // 수정하기 시에 쓰임
+    setData(
+      data.map(
+        (it) => (it.id === targetId ? { ...it, content: newContent } : it) // id가 같을 경우에 나머진 그래도 content만 newContent로 변경
+      ) // *****
+    );
+  };
+
   return (
     <div className="App">
       <DiaryEditor onCreate={onCreate} />
-      <DiaryList onDelete={onDelete} diaryList={data} />
+      <DiaryList onEdit={onEdit} onDelete={onDelete} diaryList={data} />
     </div>
   );
 }
