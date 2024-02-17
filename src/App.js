@@ -3,6 +3,7 @@ import "./App.css";
 import DiaryEditor from "./DiaryEditor";
 import DiaryList from "./DiraryList";
 import { useRef, useState } from "react";
+import LifeCycle from "./LifeCycle";
 
 // 데이터 객체를 리스트로
 const dummyList = [
@@ -66,6 +67,7 @@ function App() {
 
   return (
     <div className="App">
+      <LifeCycle />
       <DiaryEditor onCreate={onCreate} />
       <DiaryList onEdit={onEdit} onDelete={onDelete} diaryList={data} />
     </div>
