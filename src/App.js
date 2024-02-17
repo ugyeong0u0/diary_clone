@@ -2,7 +2,7 @@ import logo from "./logo.svg";
 import "./App.css";
 import DiaryEditor from "./DiaryEditor";
 import DiaryList from "./DiraryList";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import LifeCycle from "./LifeCycle";
 
 // 데이터 객체를 리스트로
@@ -33,6 +33,29 @@ const dummyList = [
 function App() {
   const [data, setData] = useState([]); // 빈배열로 초기화
   const dataId = useRef(0); // 0으로 초기화
+
+  const getData = async () => {
+    const res = await fetch(
+      "https://jsonplaceholder.typicode.com/comments"
+    ).then((res) => res.json());
+
+    const initData = res.slice(0, 20).map((it) => {
+      return {
+        author: it.email,
+        content: it.body,
+        emotion: Math.floor(Math.random() * 5) + 1, // 랜덤이 정수가 아니라서 floor
+        created_date: new Date().getTime() + 1,
+        id: dataId.current++,
+      };
+    });
+    setData(initData);
+  };
+
+  useEffect(() => {
+    setTimeout(() => {
+      getData();
+    }, 1500);
+  }, []); // 마운트 시 데이터 불러오기
 
   const onCreate = (author, content, emotion) => {
     // DiaryEditor에서 클릭시 실행
@@ -67,7 +90,7 @@ function App() {
 
   return (
     <div className="App">
-      <LifeCycle />
+      {/* <LifeCycle /> */}
       <DiaryEditor onCreate={onCreate} />
       <DiaryList onEdit={onEdit} onDelete={onDelete} diaryList={data} />
     </div>
