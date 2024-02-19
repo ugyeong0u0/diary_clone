@@ -39,6 +39,7 @@ const DiaryEditor = ({ onCreate }) => {
       emotion: 1,
     }); // 값 초기화
   };
+
   return (
     <div className="DiaryEditor">
       <h2>오늘의 일기</h2>

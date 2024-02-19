@@ -2,7 +2,7 @@ import logo from "./logo.svg";
 import "./App.css";
 import DiaryEditor from "./DiaryEditor";
 import DiaryList from "./DiraryList";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import LifeCycle from "./LifeCycle";
 
 // 데이터 객체를 리스트로
@@ -88,9 +88,23 @@ function App() {
     );
   };
 
+  // 개수 변화가 있으면 감정 재분류
+  const getDiaryAnalysis = useMemo(() => {
+    console.log("일기 분석 시작");
+    const goodCount = data.filter((it) => it.emotion >= 3).length;
+    const badCount = data.length - goodCount;
+    const goodRatio = (goodCount / badCount) * 100;
+    return { goodCount, badCount, goodRatio };
+  }, [data.length]);
+  const { goodCount, badCount, goodRatio } = getDiaryAnalysis;
+
   return (
     <div className="App">
       {/* <LifeCycle /> */}
+      <div>천체일기 : {data.length}</div>
+      <div>기분 좋은 일기 개수 : {goodCount}</div>
+      <div>기분 나쁜 일기 개수 : {badCount}</div>
+      <div>기분좋은/ 나쁜 비율 : {goodRatio}</div>
       <DiaryEditor onCreate={onCreate} />
       <DiaryList onEdit={onEdit} onDelete={onDelete} diaryList={data} />
     </div>
